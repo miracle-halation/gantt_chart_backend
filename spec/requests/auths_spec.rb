@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe "Auths", type: :request do
-  describe "POST /v1/auth" do
+RSpec.describe 'Auths', type: :request do
+  describe 'POST /v1/auth' do
     context '成功するとき' do
       it '値が正常だと登録に成功してログインデータを返す' do
         test_params = { name: 'test', email: 'test@gmail.com', password: 'testtest' }
         expect { post v1_user_registration_path, params: test_params }.to change(User, :count).by(1)
         expect(response.status).to eq(200)
         json = JSON.parse(response.body)
-        last_user = User.last()
+        last_user = User.last
         expect(json['data']['id']).to eq last_user.id
       end
     end
@@ -22,9 +22,9 @@ RSpec.describe "Auths", type: :request do
       end
     end
   end
-  describe "POST /v1/auth/sign_in" do
-    let!(:user){FactoryBot.create(:user, email: 'test@gmail.com', password: 'testtest')}
-    context "成功するとき" do
+  describe 'POST /v1/auth/sign_in' do
+    let!(:user) { FactoryBot.create(:user, email: 'test@gmail.com', password: 'testtest') }
+    context '成功するとき' do
       it '既に登録されている値だと必要な値を返す' do
         test_params = { email: 'test@gmail.com', password: 'testtest' }
         post v1_user_session_path, params: test_params

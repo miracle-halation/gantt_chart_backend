@@ -17,7 +17,7 @@ RSpec.describe User, type: :model do
       it 'nameが51文字以上だと登録できない' do
         user.name = 'a' * 51
         user.valid?
-        expect(user.errors.full_messages).to include("Name is too long (maximum is 50 characters)")
+        expect(user.errors.full_messages).to include('Name is too long (maximum is 50 characters)')
       end
       it 'emailが空欄だと登録できない' do
         user.email = ''
@@ -27,13 +27,13 @@ RSpec.describe User, type: :model do
       it 'emailの形式が違うと登録できない' do
         user.email = 'wrong@mail'
         user.valid?
-        expect(user.errors.full_messages).to include("Email is invalid")
+        expect(user.errors.full_messages).to include('Email is invalid')
       end
       it 'emailが既に登録されていると登録できない' do
         FactoryBot.create(:user, email: 'test@gmail.com')
         user.email = 'test@gmail.com'
         user.valid?
-        expect(user.errors.full_messages).to include("Email has already been taken")
+        expect(user.errors.full_messages).to include('Email has already been taken')
       end
       it 'passwordが空欄だと登録できない' do
         user.password = ''
@@ -43,12 +43,12 @@ RSpec.describe User, type: :model do
       it 'passwordが6文字以上だと登録できない' do
         user.password = 'a' * 5
         user.valid?
-        expect(user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
+        expect(user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
       it 'nameが51文字以上だと登録できない' do
         user.password = 'a' * 51
         user.valid?
-        expect(user.errors.full_messages).to include("Password is too long (maximum is 50 characters)")
+        expect(user.errors.full_messages).to include('Password is too long (maximum is 50 characters)')
       end
     end
   end
