@@ -12,7 +12,7 @@ jobs:
           DB_USERNAME: 'root'
           DB_PASSWORD: 'password'
       - image: circleci/mysql:8.0
-        enviroment:
+        environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: true
     executor: ruby/default
     steps:
