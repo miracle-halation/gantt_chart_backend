@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.describe 'Auths', type: :request do
   describe 'POST /v1/auth' do
     context '成功するとき' do
+      let(:group){FactoryBot.create(:group)}
       it '値が正常だと登録に成功してログインデータを返す' do
-        test_params = { name: 'test', email: 'test@gmail.com', password: 'testtest' }
+        test_params = { name: 'test', email: 'test@gmail.com', password: 'testtest', group_id: group.id }
         expect { post v1_user_registration_path, params: test_params }.to change(User, :count).by(1)
         expect(response.status).to eq(200)
         json = JSON.parse(response.body)
