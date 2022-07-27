@@ -33,7 +33,6 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.1]
       t.string :nickname
       t.string :image
       t.string :email
-      t.integer :group_id, null: false
 
       ## Tokens
       t.text :tokens
