@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_11_154851) do
+ActiveRecord::Schema.define(version: 2022_07_27_120153) do
+
+  create_table "groups", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -28,6 +34,7 @@ ActiveRecord::Schema.define(version: 2022_07_11_154851) do
     t.string "nickname"
     t.string "image"
     t.string "email"
+    t.integer "group_id", null: false
     t.text "tokens"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
