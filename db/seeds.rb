@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Group.create(name: '営業')
+Group.create(name: '制作')
+Group.create(name: 'システム')
+Group.create(name: '企画')
