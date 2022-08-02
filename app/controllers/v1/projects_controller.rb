@@ -1,4 +1,5 @@
 class V1::ProjectsController < ApplicationController
+	before_action :find_project, only: [:show, :update, :destroy]
 	def index
 		projects = Project.all()
 		render json: projects
@@ -13,8 +14,29 @@ class V1::ProjectsController < ApplicationController
 		end
 	end
 
+	def show
+		render json: @project
+	end
+
+	def update
+		if @project.update(project_params)
+			render json: @project
+		else
+			render json: ['error': '作成に失敗しました', 'errors_msg': @project.errors.full_messages]
+		end
+	end
+
+	def destroy
+		@project.destroy
+		render json: ['success': 'プロジェクトを削除しました']
+	end
+
 	private
 	def project_params
 		params.require(:project).permit(:title, :category, :url, :deadline, :group_id)
+	end
+
+	def find_project
+		@project = Project.find(params[:id])
 	end
 end
