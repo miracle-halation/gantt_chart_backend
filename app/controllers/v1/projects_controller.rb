@@ -1,5 +1,7 @@
 class V1::ProjectsController < ApplicationController
+	before_action :authenticate_v1_user!
 	before_action :find_project, only: [:show, :update, :destroy]
+
 	def index
 		projects = Project.all()
 		render json: projects
