@@ -3,9 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Auths', type: :request do
   describe 'POST /v1/auth' do
     context '成功するとき' do
-      let(:group){FactoryBot.create(:group)}
       it '値が正常だと登録に成功してログインデータを返す' do
-        test_params = { name: 'test', email: 'test@gmail.com', password: 'testtest', group_id: group.id }
+        test_params = { email: 'test@gmail.com', password: 'testtest' }
         expect { post v1_user_registration_path, params: test_params }.to change(User, :count).by(1)
         expect(response.status).to eq(200)
         json = JSON.parse(response.body)
@@ -15,7 +14,7 @@ RSpec.describe 'Auths', type: :request do
     end
     context '失敗するとき' do
       it '必要な値が空だと保存に失敗してエラーを返す' do
-        test_params = { name: '', email: '', password: '' }
+        test_params = { email: '', password: '' }
         expect { post v1_user_registration_path, params: test_params }.to change(User, :count).by(0)
         expect(response.status).to eq(422)
         json = JSON.parse(response.body)
