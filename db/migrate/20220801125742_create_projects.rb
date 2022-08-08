@@ -5,7 +5,6 @@ class CreateProjects < ActiveRecord::Migration[6.1]
       t.string :category, null:false
       t.string :url
       t.date :deadline, null:false
-      t.references :group, foreign_key: true, index: true
       t.timestamps
     end
   end

@@ -12,21 +12,13 @@
 
 ActiveRecord::Schema.define(version: 2022_08_01_125742) do
 
-  create_table "groups", charset: "utf8mb3", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "projects", charset: "utf8mb3", force: :cascade do |t|
     t.string "title", null: false
     t.string "category", null: false
     t.string "url"
     t.date "deadline", null: false
-    t.bigint "group_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["group_id"], name: "index_projects_on_group_id"
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
@@ -54,5 +46,4 @@ ActiveRecord::Schema.define(version: 2022_08_01_125742) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "projects", "groups"
 end
