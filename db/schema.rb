@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_08_093302) do
+ActiveRecord::Schema.define(version: 2022_08_09_093229) do
 
   create_table "profiles", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -29,6 +29,15 @@ ActiveRecord::Schema.define(version: 2022_08_08_093302) do
     t.date "deadline", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "user_projects", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "project_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_user_projects_on_project_id"
+    t.index ["user_id"], name: "index_user_projects_on_user_id"
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
@@ -57,4 +66,6 @@ ActiveRecord::Schema.define(version: 2022_08_08_093302) do
   end
 
   add_foreign_key "profiles", "users"
+  add_foreign_key "user_projects", "projects"
+  add_foreign_key "user_projects", "users"
 end

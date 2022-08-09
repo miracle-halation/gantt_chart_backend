@@ -8,4 +8,6 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_one :profile, dependent: :destroy
+  has_many :projects, through: :user_projects
+  has_many :user_projects
 end

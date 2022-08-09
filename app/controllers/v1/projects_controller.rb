@@ -35,7 +35,7 @@ class V1::ProjectsController < ApplicationController
 
 	private
 	def project_params
-		params.require(:project).permit(:title, :category, :url, :deadline, :group_id)
+		params.require(:project).permit(:title, :category, :url, :deadline)
 	end
 
 	def find_project
