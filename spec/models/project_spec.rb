@@ -19,9 +19,9 @@ RSpec.describe Project, type: :model do
         expect(project.errors.full_messages).to include("Title can't be blank")
       end
       it 'titleが空欄だと登録できない' do
-        project.title = "a" * 51
+        project.title = 'a' * 51
         project.valid?
-        expect(project.errors.full_messages).to include("Title is too long (maximum is 50 characters)")
+        expect(project.errors.full_messages).to include('Title is too long (maximum is 50 characters)')
       end
       it 'categoryが空欄だと登録できない' do
         project.category = nil

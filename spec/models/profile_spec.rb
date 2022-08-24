@@ -26,7 +26,7 @@ RSpec.describe Profile, type: :model do
       it 'userが空欄だと登録できない' do
         profile.user = nil
         profile.valid?
-        expect(profile.errors.full_messages).to include("User must exist")
+        expect(profile.errors.full_messages).to include('User must exist')
       end
     end
   end
