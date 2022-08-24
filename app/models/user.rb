@@ -7,10 +7,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
 
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  with_options presence: true do
-    validates :name, length: { maximum: 50 }
-    validates :email, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
-    validates :password, length: { in: 6..50 }
-  end
+  has_one :profile, dependent: :destroy
+  has_many :user_projects, dependent: :destroy
+  has_many :projects, through: :user_projects
 end
