@@ -10,19 +10,19 @@ class V1::ProjectsController < ApplicationController
 	def create
 		project = Project.new(project_params)
 		if project.save
-			render json: project
+			render json: {data: project}
 		else
 			render json: ['error': '作成に失敗しました', 'errors_msg': project.errors.full_messages]
 		end
 	end
 
 	def show
-		render json: @project
+		render json: {data: @project}
 	end
 
 	def update
 		if @project.update(project_params)
-			render json: @project
+			render json: {data: @project}
 		else
 			render json: ['error': '作成に失敗しました', 'errors_msg': @project.errors.full_messages]
 		end
