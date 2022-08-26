@@ -15,10 +15,11 @@ class V1::ProfilesController < ApplicationController
   end
 
   def update
-    if current_v1_user.profile.update(profile_params)
+    profile = current_v1_user.profile
+    if profile.update(profile_params)
       render json: { data: current_v1_user.profile }
     else
-      render json: ['error': '編集に失敗しました', 'errors_msg': @profile.errors.full_messages]
+      render json: ['error': '編集に失敗しました', 'errors_msg': profile.errors.full_messages]
     end
   end
 
