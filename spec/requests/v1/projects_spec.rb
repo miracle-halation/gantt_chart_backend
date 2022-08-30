@@ -54,8 +54,8 @@ RSpec.describe 'V1::Projects', type: :request do
     let!(:other_user) { FactoryBot.create(:user) }
     context '成功する時' do
       it '値が正しいとprojectを更新できる' do
-        post_params = { id: project.id, project: { title: 'test_update', category: 'システム開発', url: 'test.domain.com', deadline: '2023-01-01' },
-                        user_ids: [other_user.id] }
+        post_params = { project: { title: 'test_update', category: 'システム開発', url: 'test.domain.com', deadline: '2023-01-01' },
+                        user_ids: [other_user.id], id: project.id }
         put v1_project_path(project), params: post_params, headers: auth_headers
         expect(response.status).to eq(200)
         json = JSON.parse(response.body)
@@ -65,8 +65,8 @@ RSpec.describe 'V1::Projects', type: :request do
     end
     context '失敗する時' do
       it '値が間違っている時に作成に失敗してエラーを返すする' do
-        post_params = { id: project.id, project: { title: '', category: 'システム開発', url: 'test.domain.com', deadline: '2022-12-31' },
-                        user_ids: [other_user.id] }
+        post_params = { project: { title: '', category: 'システム開発', url: 'test.domain.com', deadline: '2022-12-31' },
+                        user_ids: [other_user.id], id: project.id }
         put v1_project_path(project), params: post_params, headers: auth_headers
         expect(response.status).to eq(200)
         json = JSON.parse(response.body)
