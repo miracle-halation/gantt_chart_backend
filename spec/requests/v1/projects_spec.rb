@@ -53,7 +53,7 @@ RSpec.describe 'V1::Projects', type: :request do
     let!(:project) { FactoryBot.create(:project) }
     let!(:other_user) { FactoryBot.create(:user) }
     context '成功する時' do
-      it '値が正しいとprojectを作成できる' do
+      it '値が正しいとprojectを更新できる' do
         post_params = { id: project.id, project: { title: 'test_update', category: 'システム開発', url: 'test.domain.com', deadline: '2023-01-01' },
                         user_ids: [other_user.id] }
         put v1_project_path(project), params: post_params, headers: auth_headers
@@ -72,6 +72,18 @@ RSpec.describe 'V1::Projects', type: :request do
         json = JSON.parse(response.body)
         expect(json[0]['error']).to eq '更新に失敗しました'
         expect(json[0]['errors_msg']).to include("Title can't be blank")
+      end
+    end
+  end
+  describe 'Delete destroy /v1/projects/:id' do
+    let!(:project) { FactoryBot.create(:project) }
+    context '成功する時' do
+      it 'projectを削除する' do
+        post_params = { id: project.id }
+        expect { delete v1_project_path(project), params: post_params, headers: auth_headers }.to change(Project, :count).by(-1)
+        expect(response.status).to eq(200)
+        json = JSON.parse(response.body)
+        expect(json[0]['success']).to eq 'プロジェクトを削除しました'
       end
     end
   end
