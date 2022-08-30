@@ -24,7 +24,7 @@ class V1::ProjectsController < ApplicationController
     if @project.update(project_params)
       render json: { data: @project }
     else
-      render json: ['error': '作成に失敗しました', 'errors_msg': @project.errors.full_messages]
+      render json: ['error': '更新に失敗しました', 'errors_msg': @project.errors.full_messages]
     end
   end
 
